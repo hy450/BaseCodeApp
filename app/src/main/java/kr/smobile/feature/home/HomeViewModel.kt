@@ -1,4 +1,4 @@
-package kr.smobile.core.feature.home
+package kr.smobile.feature.home
 
 import androidx.lifecycle.ViewModel
 

@@ -1,11 +1,11 @@
-package kr.smobile.core.feature
+package kr.smobile.feature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.SavedStateViewModelFactory
-import kr.smobile.core.R
+import kr.smobile.R
+
 
 class MainActivity : AppCompatActivity() {
 

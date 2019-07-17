@@ -6,7 +6,7 @@
 
 
     <fragment android:id="@+id/homeFragment"
-              android:name="kr.smobile.core.feature.home.HomeFragment"
+              android:name="kr.smobile.feature.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home"/>
 </navigation>

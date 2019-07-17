@@ -1,4 +1,4 @@
-package kr.smobile.core.feature.home
+package kr.smobile.feature.home
 
 
 import android.os.Bundle
@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
-import kr.smobile.core.R
-import kr.smobile.core.feature.MainViewModel
+import kr.smobile.R
 
 
 /**
