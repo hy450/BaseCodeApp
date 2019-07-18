@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
 import kr.smobile.R
+import kr.smobile.core.di.Injectable
 
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), Injectable {
 
     val viewmodel by viewModels<HomeViewModel> { SavedStateViewModelFactory(this) }
 
