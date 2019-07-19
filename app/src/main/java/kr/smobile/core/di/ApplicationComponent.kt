@@ -8,7 +8,7 @@ import kr.smobile.BaseApplication
 import javax.inject.Singleton
 
 @Singleton
-@Component( modules = [ApplicationModule::class, AndroidInjectionModule::class])
+@Component( modules = [ApplicationModule::class, AndroidInjectionModule::class, ActivityBuilderModule::class])
 interface ApplicationComponent {
 
     @Component.Builder
