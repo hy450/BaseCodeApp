@@ -81,7 +81,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                 }
                 is ApiErrorResponse -> {
                     onFetchFailed()
-                    result.addSource(dbSource) { newData ->
+                    result.addSource(dbSource) { _ ->
                         setValue(Resource.Error(response.failure))
                     }
                 }

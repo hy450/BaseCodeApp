@@ -12,4 +12,7 @@ import kr.smobile.vo.OpenWeatherResult
     exportSchema = false
 )
 abstract class BaseCodeDb : RoomDatabase() {
+
+    abstract fun weatherDao(): WeatherDao
+
 }

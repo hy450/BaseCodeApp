@@ -1,5 +1,6 @@
 package kr.smobile.vo
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
@@ -41,17 +42,19 @@ data class MainInfo(
 
 )
 
-@Entity(primaryKeys = ["id"])
+@Entity(primaryKeys = ["coord_latitude","coord_longitude", "date"])
 @TypeConverters(OpenWeatherTypeConverter::class)
 data class OpenWeatherResult(
-    @field:SerializedName("id")
-    var id: Long,
     @field:SerializedName("coord")
+    @field:Embedded( prefix = "coord_")
     val coordindate: Coordindate,
     @field:SerializedName("weather")
     val weatherItems: List<WeatherItem>,
+
     @field:SerializedName("main")
+    @field:Embedded
     val mainWeatherInfo: MainInfo,
+
     @field:SerializedName("id")
     val cityId: Int,
     @field:SerializedName("name")

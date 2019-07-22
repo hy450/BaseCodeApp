@@ -8,6 +8,7 @@ import dagger.Provides
 import kr.smobile.core.api.WeatherRestApiService
 import kr.smobile.core.db.BaseCodeDb
 import kr.smobile.core.db.DBConfigure
+import kr.smobile.core.db.WeatherDao
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -40,6 +41,10 @@ class ApplicationModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideWeatherDao( db: BaseCodeDb ) : WeatherDao = db.weatherDao()
 
 
 }

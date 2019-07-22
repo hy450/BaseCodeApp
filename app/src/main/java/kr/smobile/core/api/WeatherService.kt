@@ -14,23 +14,19 @@ class WeatherService @Inject constructor( @Named( "openweather") retrofit: Retro
         retrofit.create( WeatherRestApiService::class.java)
     }
 
-    override fun getWeatherByCityName(cityName: String): LiveData<OpenWeatherResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWeatherByCityName(cityName: String): LiveData<OpenWeatherResult>
+            = retrofitApi.getWeatherByCityName(cityName = cityName)
 
-    override fun getWeatherByCityId(cityId: String): LiveData<OpenWeatherResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWeatherByCityId(cityId: String): LiveData<OpenWeatherResult>
+            = retrofitApi.getWeatherByCityId(cityId = cityId)
 
-    override fun getWeatherByCityIds(cityId: String, units: String): LiveData<OpenWeatherResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun getWeatherByCoordinate(lat: Double, lon: Double): LiveData<OpenWeatherResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWeatherByCityIds(cityId: String, units: String): LiveData<OpenWeatherResult>
+            = retrofitApi.getWeatherByCityIds(cityId, units)
 
-    override fun getWeatherByZipCode(zipCode: String, contryCode: String): LiveData<OpenWeatherResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWeatherByCoordinate(lat: Double, lon: Double): LiveData<OpenWeatherResult>
+            = retrofitApi.getWeatherByCoordinate(lat = lat, lon = lon)
+
+    override fun getWeatherByZipCode(zipCode: String, contryCode: String): LiveData<OpenWeatherResult>
+            = retrofitApi.getWeatherByZipCode(zipCode,contryCode)
 }
