@@ -42,7 +42,7 @@ data class MainInfo(
 
 )
 
-@Entity(primaryKeys = ["coord_latitude","coord_longitude", "date"])
+@Entity(primaryKeys = ["coord_latitude","coord_longitude", "datetime"])
 @TypeConverters(OpenWeatherTypeConverter::class)
 data class OpenWeatherResult(
     @field:SerializedName("coord")
@@ -60,9 +60,9 @@ data class OpenWeatherResult(
     @field:SerializedName("name")
     val cityName: String,
     @field:SerializedName("dt") // Time of data calculation, unix, UTC
-    val date: Date,
+    val datetime: Long,
     @field:SerializedName("timezone")
-    val timezone: Int,
+    val timezone: Int?,
     @field:SerializedName("cod") // internal parameter
     val cod: Int
 

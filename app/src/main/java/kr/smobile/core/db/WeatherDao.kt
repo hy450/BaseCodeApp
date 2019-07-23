@@ -12,10 +12,10 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(weatherResult: OpenWeatherResult)
 
-    @Query("SELECT * FROM OpenWeatherResult WHERE cityName = :cityName ORDER BY date DESC LIMIT 1")
+    @Query("SELECT * FROM OpenWeatherResult WHERE cityName = :cityName ORDER BY datetime DESC LIMIT 1")
     fun getLatestWeatherByCityName(cityName: String): LiveData<OpenWeatherResult>
 
-    @Query("SELECT * FROM OpenWeatherResult WHERE cityId = :cityId ORDER BY date DESC LIMIT 1")
+    @Query("SELECT * FROM OpenWeatherResult WHERE cityId = :cityId ORDER BY datetime DESC LIMIT 1")
     fun getLatestWeatherByCityId(cityId: Int): LiveData<OpenWeatherResult>
 
 
