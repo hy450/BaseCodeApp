@@ -2,23 +2,25 @@ package kr.smobile.feature.home
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import kr.smobile.R
 import kr.smobile.core.di.Injectable
+import kr.smobile.core.extension.viewModel
+import kr.smobile.feature.BaseFragment
 
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class HomeFragment : Fragment(), Injectable {
+class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
 
-    val viewmodel by viewModels<HomeViewModel> { SavedStateViewModelFactory(this) }
+    //val viewmodel by viewModels<HomeViewModel> { SavedStateViewModelFactory(this) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,5 +30,15 @@ class HomeFragment : Fragment(), Injectable {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun createViewModel(): HomeViewModel {
+        return viewModel(viewModelFactory) {
 
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getFavoriteWeatherInfos()
+    }
 }
