@@ -14,19 +14,19 @@ class WeatherService @Inject constructor( @Named( "openweather") retrofit: Retro
         retrofit.create( WeatherRestApiService::class.java)
     }
 
-    override fun getWeatherByCityName(cityName: String): LiveData<OpenWeatherResult>
+    override fun getWeatherByCityName(cityName: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCityName(cityName = cityName)
 
-    override fun getWeatherByCityId(cityId: String): LiveData<OpenWeatherResult>
+    override fun getWeatherByCityId(cityId: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCityId(cityId = cityId)
 
 
-    override fun getWeatherByCityIds(cityId: String, units: String): LiveData<OpenWeatherResult>
+    override fun getWeatherByCityIds(cityId: String, units: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCityIds(cityId, units)
 
-    override fun getWeatherByCoordinate(lat: Double, lon: Double): LiveData<OpenWeatherResult>
+    override fun getWeatherByCoordinate(lat: Double, lon: Double): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCoordinate(lat = lat, lon = lon)
 
-    override fun getWeatherByZipCode(zipCode: String, contryCode: String): LiveData<OpenWeatherResult>
+    override fun getWeatherByZipCode(zipCode: String, contryCode: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByZipCode(zipCode,contryCode)
 }
