@@ -19,7 +19,7 @@ abstract class BaseFragment<T: BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // onCreate에서 생성하지 않고 onViewCreated에서 생성해야함.
+        // onCreate 에서 생성하지 않고 onViewCreated 에서 생성해야함.
         viewModel = createViewModel()
     }
 }
