@@ -27,7 +27,7 @@ interface WeatherRestApiService {
      *
      */
     @GET("weather?appid=$appid")
-    fun getWeatherByCityId( @Query("id") cityId: String ) : LiveData<ApiResponse<OpenWeatherResult>>
+    fun getWeatherByCityId( @Query("id") cityId: Int ) : LiveData<ApiResponse<OpenWeatherResult>>
 
     @GET("group?appid=$appid")
     fun getWeatherByCityIds( @Query("ids") cityId: String, @Query("units") units: String ) : LiveData<ApiResponse<OpenWeatherResult>>

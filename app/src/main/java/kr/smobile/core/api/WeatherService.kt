@@ -1,12 +1,14 @@
 package kr.smobile.core.api
 
 import androidx.lifecycle.LiveData
+import kr.smobile.core.testing.OpenForTesting
 import kr.smobile.vo.OpenWeatherResult
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+@OpenForTesting
 @Singleton
 class WeatherService @Inject constructor( @Named( "openweather") retrofit: Retrofit ) : WeatherRestApiService {
 
@@ -17,12 +19,12 @@ class WeatherService @Inject constructor( @Named( "openweather") retrofit: Retro
     override fun getWeatherByCityName(cityName: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCityName(cityName = cityName)
 
-    override fun getWeatherByCityId(cityId: String): LiveData<ApiResponse<OpenWeatherResult>>
+    override fun getWeatherByCityId(cityId: Int): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCityId(cityId = cityId)
 
 
-    override fun getWeatherByCityIds(cityId: String, units: String): LiveData<ApiResponse<OpenWeatherResult>>
-            = retrofitApi.getWeatherByCityIds(cityId, units)
+    override fun getWeatherByCityIds(cityIds: String, units: String): LiveData<ApiResponse<OpenWeatherResult>>
+            = retrofitApi.getWeatherByCityIds(cityIds, units)
 
     override fun getWeatherByCoordinate(lat: Double, lon: Double): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByCoordinate(lat = lat, lon = lon)
