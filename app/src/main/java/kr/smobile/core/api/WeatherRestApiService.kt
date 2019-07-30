@@ -1,6 +1,7 @@
 package kr.smobile.core.api
 
 import androidx.lifecycle.LiveData
+import kr.smobile.vo.ForeCastResult
 import kr.smobile.vo.OpenWeatherResult
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -44,6 +45,15 @@ interface WeatherRestApiService {
      */
     @GET("weather?appid=$appid&zip={zipCode},{contryCode}")
     fun getWeatherByZipCode( @Path("zipCode") zipCode: String, @Path("contryCode") contryCode: String ) : LiveData<ApiResponse<OpenWeatherResult>>
+
+
+    //forecast
+    //Call 5 day / 3 hour forecast data
+    @GET("forecast?appid=$appid")
+    fun getForecastByCityName( @Query("q") cityName: String) : LiveData<ApiResponse<ForeCastResult>>
+
+    @GET("forecast?appid=$appid")
+    fun getForecastByCityId( @Query("id") cityId: Int) : LiveData<ApiResponse<ForeCastResult>>
 
 
 

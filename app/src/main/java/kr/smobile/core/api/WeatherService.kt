@@ -2,6 +2,7 @@ package kr.smobile.core.api
 
 import androidx.lifecycle.LiveData
 import kr.smobile.core.testing.OpenForTesting
+import kr.smobile.vo.ForeCastResult
 import kr.smobile.vo.OpenWeatherResult
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -31,4 +32,10 @@ class WeatherService @Inject constructor( @Named( "openweather") retrofit: Retro
 
     override fun getWeatherByZipCode(zipCode: String, contryCode: String): LiveData<ApiResponse<OpenWeatherResult>>
             = retrofitApi.getWeatherByZipCode(zipCode,contryCode)
+
+    override fun getForecastByCityName(cityName: String): LiveData<ApiResponse<ForeCastResult>>
+            = retrofitApi.getForecastByCityName(cityName)
+
+    override fun getForecastByCityId(cityId: Int): LiveData<ApiResponse<ForeCastResult>>
+            = retrofitApi.getForecastByCityId(cityId)
 }

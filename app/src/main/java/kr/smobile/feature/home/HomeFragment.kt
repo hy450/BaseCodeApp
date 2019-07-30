@@ -9,8 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import kr.smobile.R
 import kr.smobile.core.di.Injectable
+import kr.smobile.core.extension.debug
+import kr.smobile.core.extension.observe
 import kr.smobile.core.extension.viewModel
 import kr.smobile.feature.BaseFragment
+import kr.smobile.vo.ForeCastResult
+import kr.smobile.vo.OpenForeCastWeather
+import kr.smobile.vo.OpenWeatherResult
+import kr.smobile.vo.Resource
 
 
 /**
@@ -32,13 +38,25 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
 
     override fun createViewModel(): HomeViewModel {
         return viewModel(viewModelFactory) {
-
+            observe(favorCityWeatherRepo, ::updateCurrWeatherInfo)
+            observe(favorHourlyWeatherRepo, ::updateForeCastWeather)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getFavoriteWeatherInfos()
+        viewModel.setCurrFavoriteCity(1835848) // seoul
+
+
+    }
+
+    private fun updateCurrWeatherInfo(weatherInfo : Resource<OpenWeatherResult>?) {
+        debug("updateCurrWeatherInfo")
+
+    }
+
+    private fun updateForeCastWeather( foreCastWeather: Resource<ForeCastResult>? ) {
+        debug("updateForeCastWeather")
     }
 }

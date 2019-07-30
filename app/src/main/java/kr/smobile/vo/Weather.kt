@@ -1,5 +1,6 @@
 package kr.smobile.vo
 
+import androidx.annotation.Nullable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.TypeConverters
@@ -18,7 +19,7 @@ data class WeatherItem(
     val icon:String
 )
 
-data class Coordindate (
+data class Coordinate (
 
     @field:SerializedName("lat")
     val latitude: Double,
@@ -47,7 +48,7 @@ data class MainInfo(
 data class OpenWeatherResult(
     @field:SerializedName("coord")
     @field:Embedded( prefix = "coord_")
-    val coordindate: Coordindate,
+    val coordinate: Coordinate,
     @field:SerializedName("weather")
     val weatherItems: List<WeatherItem>,
 
@@ -65,5 +66,46 @@ data class OpenWeatherResult(
     val timezone: Int?,
     @field:SerializedName("cod") // internal parameter
     val cod: Int
+
+)
+
+
+data class OpenForeCastWeather(
+    @field:SerializedName("weather")
+    val weatherItems: List<WeatherItem>,
+    @field:SerializedName("main")
+    val mainWeatherInfo: MainInfo,
+    @field:SerializedName("dt") // Time of data calculation, unix, UTC
+    val datetime: Long,
+    @field:SerializedName("dt_txt")
+    val dt_txt: String?
+)
+
+data class OpenForeCastCity(
+    @field:SerializedName("coord")
+    @field:Embedded( prefix = "coord_")
+    val coordinate: Coordinate,
+    @field:SerializedName("id")
+    val cityId: Int,
+    @field:SerializedName("name")
+    val cityName: String
+)
+
+//forecast result
+@Entity(primaryKeys = ["coord_latitude","coord_longitude", "createAt"])
+@TypeConverters(OpenWeatherTypeConverter::class)
+data class ForeCastResult(
+    @field:SerializedName("cod")       // internal parameter
+    val cod: Int,
+    @field:SerializedName("cnt")
+    val count: Int,
+
+    @field:SerializedName("list")
+    val list: List<OpenForeCastWeather>,
+
+    @field:SerializedName("city")
+    @field:Embedded
+    val cityInfo: OpenForeCastCity,
+    var createAt: Long = 0                      // db 생성 날짜
 
 )

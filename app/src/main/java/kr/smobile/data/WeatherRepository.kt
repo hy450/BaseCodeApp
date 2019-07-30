@@ -1,10 +1,12 @@
 package kr.smobile.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kr.smobile.AppExecutors
 import kr.smobile.core.api.ApiResponse
 import kr.smobile.core.api.WeatherService
 import kr.smobile.core.db.WeatherDao
+import kr.smobile.vo.ForeCastResult
 import kr.smobile.vo.OpenWeatherResult
 import kr.smobile.vo.Resource
 import java.util.*
@@ -70,5 +72,43 @@ class WeatherRepository @Inject constructor(
 
         }.asLiveData()
     }
+
+    fun loadForeCastWeather( cityId : Int) : LiveData<Resource<ForeCastResult>> {
+        return object : NetworkBoundResource<ForeCastResult,ForeCastResult>(appExecutors) {
+            override fun saveCallResult(item: ForeCastResult) {
+                item.createAt = Date().time
+                weatherDao.insert(item)
+            }
+
+            override fun shouldFetch(data: ForeCastResult?): Boolean {
+                return data == null // 데이터가 없다면 서버로부터 요청
+            }
+
+            override fun loadFromDb(): LiveData<ForeCastResult>
+                = weatherDao.getForecastByCityId(cityId)
+
+            override fun createCall(): LiveData<ApiResponse<ForeCastResult>>
+                = weatherService.getForecastByCityId(cityId)
+        }.asLiveData()
+    }
+
+    // demo test
+    // only cloud function
+    /*
+    fun checkPrivateKey( key: String) : LiveData< Resource<Boolean>> {
+        return object : NetworkBoundResource<Boolean,Boolean>(appExecutors) {
+            override fun saveCallResult(item: Boolean) {
+                //ignore
+            }
+            override fun shouldFetch(data: Boolean?): Boolean = true
+            override fun loadFromDb(): LiveData<Boolean> {
+                return MutableLiveData()
+            }
+            override fun createCall(): LiveData<ApiResponse<Boolean>> {
+                return //
+            }
+        }.asLiveData()
+    }
+    */
 
 }
