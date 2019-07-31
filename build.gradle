@@ -38,5 +38,6 @@ ext {
     okhttpVersion = "3.6.0"
     daggerVersion = "2.22.1"
     mockitoVersion = "2.25.0"
+    glide_version = '4.9.0'
 
 }

@@ -10,7 +10,7 @@ import java.util.*
 
 data class WeatherItem(
     @field:SerializedName("id")
-    val id: Int, // Weather condition id
+    val id: Int, // Weather condition id // https://openweathermap.org/weather-conditions
     @field:SerializedName("main")
     val main: String, // weather parametr  ex> Rain, Snow, Extreme, Clear
     @field:SerializedName("description")

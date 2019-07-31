@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
 
     implementation "androidx.fragment:fragment-ktx:1.0.0"
+    implementation "com.google.android.material:material:1.1.0-alpha08"
 
     //room db --[[
     kapt 'androidx.room:room-compiler:2.1.0'
@@ -87,6 +88,10 @@ dependencies {
 
     //logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:${glide_version}"
+    kapt "com.github.bumptech.glide:compiler:${glide_version}"
 
     //for debugging
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
