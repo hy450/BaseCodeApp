@@ -20,39 +20,39 @@ interface WeatherRestApiService {
      * api.openweathermap.org/data/2.5/weather?q={city name},{country code}
      */
 
-    @GET("weather?appid=$appid")
+    @GET("weather?appid=$appid&units=metric")
     fun getWeatherByCityName( @Query("q") cityName: String ) : LiveData<ApiResponse<OpenWeatherResult>>
 
     /**
      * by city id
      *
      */
-    @GET("weather?appid=$appid")
+    @GET("weather?appid=$appid&units=metric")
     fun getWeatherByCityId( @Query("id") cityId: Int ) : LiveData<ApiResponse<OpenWeatherResult>>
 
-    @GET("group?appid=$appid")
+    @GET("group?appid=$appid&units=metric")
     fun getWeatherByCityIds( @Query("ids") cityId: String, @Query("units") units: String ) : LiveData<ApiResponse<OpenWeatherResult>>
 
     /**
      * by cooridinates
      */
-    @GET("weather?appid=$appid")
+    @GET("weather?appid=$appid&units=metric")
     fun getWeatherByCoordinate( @Query("lat") lat: Double, @Query("lon") lon : Double ) : LiveData<ApiResponse<OpenWeatherResult>>
 
     /**
      * by zip code
      * api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}
      */
-    @GET("weather?appid=$appid&zip={zipCode},{contryCode}")
+    @GET("weather?appid=$appid&units=metric&zip={zipCode},{contryCode}")
     fun getWeatherByZipCode( @Path("zipCode") zipCode: String, @Path("contryCode") contryCode: String ) : LiveData<ApiResponse<OpenWeatherResult>>
 
 
     //forecast
     //Call 5 day / 3 hour forecast data
-    @GET("forecast?appid=$appid")
+    @GET("forecast?appid=$appid&units=metric")
     fun getForecastByCityName( @Query("q") cityName: String) : LiveData<ApiResponse<ForeCastResult>>
 
-    @GET("forecast?appid=$appid")
+    @GET("forecast?appid=$appid&units=metric")
     fun getForecastByCityId( @Query("id") cityId: Int) : LiveData<ApiResponse<ForeCastResult>>
 
 
