@@ -81,7 +81,7 @@ class WeatherRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: ForeCastResult?): Boolean {
-                return data == null // 데이터가 없다면 서버로부터 요청
+                return data == null || isNeedRefresh(data.createAt) // 데이터가 없다면 서버로부터 요청
             }
 
             override fun loadFromDb(): LiveData<ForeCastResult>
