@@ -8,4 +8,38 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- 날씨 맑음 -->
+    <style name="AppTheme.NoActionBar.Home">
+
+    </style>
+
+    <style name="AppTheme.NoActionBar.Home.Clean">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">#2C70CC</item>
+        <item name="android:windowBackground">@color/clean_bg_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Home.Cloudy" parent ="AppTheme.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">#37808E</item>
+        <item name="android:windowBackground">@color/cloudy_bg_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Home.Rain" parent ="AppTheme.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">#636B74</item>
+        <item name="android:windowBackground">@color/rain_bg_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+
+
 </resources>

@@ -6,6 +6,7 @@ import kr.smobile.AppExecutors
 import kr.smobile.core.api.ApiResponse
 import kr.smobile.core.api.WeatherService
 import kr.smobile.core.db.WeatherDao
+import kr.smobile.core.testing.OpenForTesting
 import kr.smobile.vo.ForeCastResult
 import kr.smobile.vo.OpenWeatherResult
 import kr.smobile.vo.Resource
@@ -16,6 +17,7 @@ import javax.inject.Singleton
 /**
  * 날씨 정보 Repository
  */
+@OpenForTesting
 @Singleton
 class WeatherRepository @Inject constructor(
     private val appExecutors: AppExecutors,

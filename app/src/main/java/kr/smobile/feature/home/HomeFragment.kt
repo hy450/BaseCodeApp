@@ -2,12 +2,11 @@ package kr.smobile.feature.home
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.smobile.R
@@ -31,6 +30,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
         HourlyWeatherAdapter()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +57,28 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
         hourlyListView.adapter = hourlyListViewAdapter
 
         doActionSelectFavoriteCity(1835848) // seoul
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.invalidateOptionsMenu()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.home_add_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_city_change -> {
+                findNavController().navigate( HomeFragmentDirections.actionHomeFragmentToAddCityFragment() )
+                true
+            }
+            else -> false
+
+
+        }
     }
 
     /**
