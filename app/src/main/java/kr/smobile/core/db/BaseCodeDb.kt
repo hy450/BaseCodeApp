@@ -10,7 +10,7 @@ import kr.smobile.vo.OpenWeatherResult
         OpenWeatherResult::class,
         ForeCastResult::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class BaseCodeDb : RoomDatabase() {

@@ -9,7 +9,7 @@
         tools:context="kr.smobile.feature.home.HomeFragment">
 
     <ImageView
-            android:src="@drawable/weather_clean"
+            tools:src="@drawable/weather_clean"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:id="@+id/weatherImg"

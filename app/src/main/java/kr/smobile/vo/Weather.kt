@@ -65,8 +65,8 @@ data class OpenWeatherResult(
     @field:SerializedName("timezone")
     val timezone: Int?,
     @field:SerializedName("cod") // internal parameter
-    val cod: Int
-
+    val cod: Int,
+    var saveTime: Long?
 )
 
 

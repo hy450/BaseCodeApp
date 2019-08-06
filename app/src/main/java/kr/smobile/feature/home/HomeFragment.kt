@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -15,7 +14,9 @@ import kr.smobile.core.extension.debug
 import kr.smobile.core.extension.observe
 import kr.smobile.core.extension.viewModel
 import kr.smobile.feature.BaseFragment
-import kr.smobile.vo.*
+import kr.smobile.vo.ForeCastResult
+import kr.smobile.vo.OpenWeatherResult
+import kr.smobile.vo.Resource
 
 
 /**
@@ -32,6 +33,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        debug("HomeFragment onCreate")
         setHasOptionsMenu(true)
 
     }
@@ -40,14 +42,15 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        debug("HomeFragment onCreateView")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun createViewModel(): HomeViewModel {
         return viewModel(viewModelFactory) {
-            observe(favorCityWeatherRepo, ::updateCurrWeatherInfo)
-            observe(favorHourlyWeatherRepo, ::updateForeCastWeather)
+            viewLifecycleOwner.observe(favorCityWeatherRepo, ::updateCurrWeatherInfo)
+            viewLifecycleOwner.observe(favorHourlyWeatherRepo, ::updateForeCastWeather)
         }
     }
 
@@ -92,11 +95,19 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
         debug("updateCurrWeatherInfo")
 
         when(weatherInfo) {
-            is Resource.Success ->
+            is Resource.Success -> {
+                debug("updateCurrWeatherInfo success")
                 displayCurrWeather(weatherInfo.data)
-            is Resource.Loading ->
-                displayCurrWeather(weatherInfo.data)
+            }
+            is Resource.Loading -> {
+                // weatherInfo.data 가 null 이면 loading 아이콘???
+                weatherInfo.data?.let {
+                    debug("updateCurrWeatherInfo Loading")
+                    displayCurrWeather(it)
+                }
+            }
             is Resource.Error -> {
+                debug("updateCurrWeatherInfo error")
                 homeTempTxt.text = "error"
                 minMaxTempTxt.isVisible = false
             }

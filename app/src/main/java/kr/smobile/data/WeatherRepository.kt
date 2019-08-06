@@ -40,11 +40,13 @@ class WeatherRepository @Inject constructor(
     fun loadLatestWeatherByCityName(cityName: String) : LiveData<Resource<OpenWeatherResult>> {
 
         return object : NetworkBoundResource<OpenWeatherResult,OpenWeatherResult>(appExecutors) {
-            override fun saveCallResult(item: OpenWeatherResult)
-                    = weatherDao.insert(item)
+            override fun saveCallResult(item: OpenWeatherResult) {
+                item.saveTime = Date().time
+                weatherDao.insert(item)
+            }
 
             override fun shouldFetch(data: OpenWeatherResult?): Boolean {
-                return data == null  || isNeedRefresh(data.datetime)
+                return data == null  || isNeedRefresh(data.saveTime ?: 0)
             }
 
             override fun loadFromDb(): LiveData<OpenWeatherResult>
