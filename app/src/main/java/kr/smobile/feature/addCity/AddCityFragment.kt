@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kr.smobile.R
 import kr.smobile.core.di.Injectable
 import kr.smobile.core.extension.viewModel
-import kr.smobile.feature.BaseFragment
+import kr.smobile.core.platform.BaseFragment
 
 class AddCityFragment : BaseFragment<AddCityViewModel>(), Injectable {
 

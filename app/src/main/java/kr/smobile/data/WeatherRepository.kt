@@ -46,7 +46,7 @@ class WeatherRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: OpenWeatherResult?): Boolean {
-                return data == null  || isNeedRefresh(data.saveTime ?: 0)
+                return false //data == null  || isNeedRefresh(data.saveTime ?: 0)
             }
 
             override fun loadFromDb(): LiveData<OpenWeatherResult>
@@ -64,7 +64,7 @@ class WeatherRepository @Inject constructor(
                     = weatherDao.insert(item)
 
             override fun shouldFetch(data: OpenWeatherResult?): Boolean {
-                return data == null || isNeedRefresh(data.datetime)
+                return false //data == null || isNeedRefresh(data.datetime)
             }
 
             override fun loadFromDb(): LiveData<OpenWeatherResult>
@@ -85,7 +85,7 @@ class WeatherRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: ForeCastResult?): Boolean {
-                return data == null || isNeedRefresh(data.createAt) // 데이터가 없다면 서버로부터 요청
+                return false //data == null || isNeedRefresh(data.createAt) // 데이터가 없다면 서버로부터 요청
             }
 
             override fun loadFromDb(): LiveData<ForeCastResult>

@@ -9,11 +9,12 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kr.smobile.R
+import kr.smobile.core.platform.BaseActivity
 
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() , HasSupportFragmentInjector {
+class MainActivity : BaseActivity() , HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>

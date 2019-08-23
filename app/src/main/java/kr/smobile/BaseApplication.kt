@@ -6,6 +6,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import kr.smobile.core.di.AppInjector
+import kr.smobile.core.logging.FileLoggingTree
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -18,7 +19,9 @@ class BaseApplication : Application() , HasActivityInjector {
         super.onCreate()
 
         if(BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            Timber.plant(Timber.DebugTree(), FileLoggingTree())
+        } else {
+            Timber.plant(FileLoggingTree())
         }
 
         AppInjector.init(this)

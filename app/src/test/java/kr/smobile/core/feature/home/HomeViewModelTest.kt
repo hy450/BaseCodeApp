@@ -39,10 +39,8 @@ class HomeViewModelTest {
 
     @Test
     fun testDontFetchWithOutObservers() {
-
         homeViewModel.setCurrFavoriteCity(1835848)
         verify(weatherRepo,never()).loadLatesWeatherByCityId(anyInt())
-
     }
 
     @Test

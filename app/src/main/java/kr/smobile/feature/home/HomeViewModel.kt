@@ -3,15 +3,14 @@ package kr.smobile.feature.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import kr.smobile.core.platform.BaseViewModel
 import kr.smobile.core.testing.OpenForTesting
 import kr.smobile.core.util.AbsentLiveData
+import kr.smobile.core.util.ActivityIndicator
 import kr.smobile.data.WeatherRepository
-import kr.smobile.feature.BaseViewModel
 import kr.smobile.vo.ForeCastResult
-import kr.smobile.vo.OpenForeCastWeather
 import kr.smobile.vo.OpenWeatherResult
 import kr.smobile.vo.Resource
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -21,6 +20,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) : BaseViewModel() {
+
+    //var loadingLiveData = MediatorLiveData<Boolean>()
 
     private val _currFavorCityId = MutableLiveData<Int>()
     val currFavorCityId: LiveData<Int>
@@ -40,6 +41,13 @@ class HomeViewModel @Inject constructor(
         } else {
             weatherRepository.loadForeCastWeather(cityId)
         }
+    }
+
+
+    override val loadingEvent by lazy {
+        ActivityIndicator().apply {
+            regLoadingConcernLiveData(favorCityWeatherRepo,favorHourlyWeatherRepo)
+        }.asLiveData()
     }
 
     /**

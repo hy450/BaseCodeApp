@@ -13,7 +13,7 @@ import kr.smobile.core.di.Injectable
 import kr.smobile.core.extension.debug
 import kr.smobile.core.extension.observe
 import kr.smobile.core.extension.viewModel
-import kr.smobile.feature.BaseFragment
+import kr.smobile.core.platform.BaseFragment
 import kr.smobile.vo.ForeCastResult
 import kr.smobile.vo.OpenWeatherResult
 import kr.smobile.vo.Resource
@@ -56,6 +56,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadingEvent.observe(viewLifecycleOwner,showLoadingObserver)
 
         hourlyListView.adapter = hourlyListViewAdapter
 

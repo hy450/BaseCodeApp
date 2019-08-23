@@ -1,10 +1,10 @@
 package kr.smobile.core.extension
 
 import android.app.Activity
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 
 
 inline fun <reified T : ViewModel> Activity.viewModel(factory: ViewModelProvider.Factory, body: T.() -> Unit): T {
@@ -12,3 +12,7 @@ inline fun <reified T : ViewModel> Activity.viewModel(factory: ViewModelProvider
     vm.body()
     return vm
 }
+//inline fun Activity.showNoticeAlertDialog(func: NoticeDialogHelper.() -> Unit): AlertDialog =
+//    NoticeDialogHelper(this).apply {
+//        func()
+//    }.create()

@@ -3,6 +3,20 @@ package kr.smobile.core.extension
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun String.getDate(format: String) : Date? =
+    try {
+        SimpleDateFormat(format, Locale.getDefault()).parse(this)
+    } catch( e: Exception ){
+        null
+    }
+
+fun String.getCalendar(format: String) : Calendar? =
+    try {
+        SimpleDateFormat(format, Locale.getDefault()).parse(this).toCalendar()
+    } catch( e: Exception ){
+        null
+    }
+
 fun Date.getTimeStr(format: String) : String {
     val sdf = SimpleDateFormat(format, Locale.getDefault())
     return sdf.format(this)
