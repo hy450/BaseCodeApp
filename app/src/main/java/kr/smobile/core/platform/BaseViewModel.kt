@@ -16,8 +16,6 @@ abstract class BaseViewModel: ViewModel() {
     val showAlertEvent: SingleLiveEvent<VmEvent<AlertEvent>>
         get() = _showAlertEvent
 
-
-    val activityIndicator = ActivityIndicator()
     abstract val loadingEvent : LiveData<Boolean>
 
 
