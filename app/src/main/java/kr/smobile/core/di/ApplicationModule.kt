@@ -6,14 +6,13 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import kr.smobile.BuildConfig
-import kr.smobile.core.api.LiveDataCallAdapterFactory
 import kr.smobile.core.api.WeatherRestApiService
 import kr.smobile.core.db.BaseCodeDb
-import kr.smobile.core.db.DBConfigure
 import kr.smobile.core.db.WeatherDao
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
@@ -35,7 +34,7 @@ class ApplicationModule {
             .baseUrl("https://api.openweathermap.org/data/${WeatherRestApiService.version}/")
             .client(createClient())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory( LiveDataCallAdapterFactory() )
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 

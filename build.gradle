@@ -9,7 +9,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -32,11 +32,11 @@ task clean(type: Delete) {
 
 ext {
     kotlin_coroutines_version = "1.1.1"
-    lifecycleVersion = "2.2.0-alpha03"
+    lifecycleVersion = "2.2.0"
     retrofitVersion = "2.6.0"
     okhttpVersion = "3.6.0"
     daggerVersion = "2.22.1"
     mockitoVersion = "2.25.0"
     glide_version = '4.9.0'
-
+    room_version = '2.2.2'
 }

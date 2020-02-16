@@ -1,6 +1,7 @@
 package kr.smobile.feature.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import kr.smobile.core.platform.BaseViewModel
@@ -31,7 +32,7 @@ class HomeViewModel @Inject constructor(
         if(cityId == null) {
             AbsentLiveData.create()
         } else {
-            weatherRepository.loadLatesWeatherByCityId(cityId)
+            LiveDataReactiveStreams.fromPublisher(weatherRepository.loadLatesWeatherByCityId(cityId))
         }
     }
 
@@ -39,7 +40,7 @@ class HomeViewModel @Inject constructor(
         if(cityId == null) {
             AbsentLiveData.create()
         } else {
-            weatherRepository.loadForeCastWeather(cityId)
+            LiveDataReactiveStreams.fromPublisher(weatherRepository.loadForeCastWeather(cityId))
         }
     }
 

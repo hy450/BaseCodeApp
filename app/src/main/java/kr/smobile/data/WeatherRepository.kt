@@ -1,9 +1,9 @@
 package kr.smobile.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 import kr.smobile.AppExecutors
-import kr.smobile.core.api.ApiResponse
 import kr.smobile.core.api.WeatherService
 import kr.smobile.core.db.WeatherDao
 import kr.smobile.core.testing.OpenForTesting
@@ -37,63 +37,63 @@ class WeatherRepository @Inject constructor(
     }
 
     // 최신 날씨 정보 가져오기
-    fun loadLatestWeatherByCityName(cityName: String) : LiveData<Resource<OpenWeatherResult>> {
+    fun loadLatestWeatherByCityName(cityName: String) : Flowable<Resource<OpenWeatherResult>> {
 
-        return object : NetworkBoundResource<OpenWeatherResult,OpenWeatherResult>(appExecutors) {
+        return object : RxNetworkBoundResource<OpenWeatherResult,OpenWeatherResult>() {
             override fun saveCallResult(item: OpenWeatherResult) {
                 item.saveTime = Date().time
                 weatherDao.insert(item)
             }
 
-            override fun shouldFetch(data: OpenWeatherResult?): Boolean {
-                return false //data == null  || isNeedRefresh(data.saveTime ?: 0)
+            override fun shouldFetch(item: Single<OpenWeatherResult>): Single<Boolean> {
+                return Single.just(true)
             }
 
-            override fun loadFromDb(): LiveData<OpenWeatherResult>
+            override fun loadFromDb(): Maybe<OpenWeatherResult>
                     = weatherDao.getLatestWeatherByCityName(cityName)
 
 
-            override fun createCall(): LiveData<ApiResponse<OpenWeatherResult>>
+            override fun createCall(): Flowable<OpenWeatherResult>
                     = weatherService.getWeatherByCityName(cityName)
-        }.asLiveData()
+        }.asFlowable()
     }
 
-    fun loadLatesWeatherByCityId( cityId: Int) : LiveData<Resource<OpenWeatherResult>> {
-        return object : NetworkBoundResource<OpenWeatherResult,OpenWeatherResult>(appExecutors) {
+    fun loadLatesWeatherByCityId( cityId: Int) : Flowable<Resource<OpenWeatherResult>> {
+        return object : RxNetworkBoundResource<OpenWeatherResult,OpenWeatherResult>() {
             override fun saveCallResult(item: OpenWeatherResult)
                     = weatherDao.insert(item)
 
-            override fun shouldFetch(data: OpenWeatherResult?): Boolean {
-                return false //data == null || isNeedRefresh(data.datetime)
+            override fun shouldFetch(item: Single<OpenWeatherResult>): Single<Boolean> {
+                return Single.just(true)
             }
 
-            override fun loadFromDb(): LiveData<OpenWeatherResult>
+            override fun loadFromDb(): Maybe<OpenWeatherResult>
                     = weatherDao.getLatestWeatherByCityId(cityId)
 
 
-            override fun createCall(): LiveData<ApiResponse<OpenWeatherResult>>
+            override fun createCall(): Flowable<OpenWeatherResult>
                     = weatherService.getWeatherByCityId(cityId)
 
-        }.asLiveData()
+        }.asFlowable()
     }
 
-    fun loadForeCastWeather( cityId : Int) : LiveData<Resource<ForeCastResult>> {
-        return object : NetworkBoundResource<ForeCastResult,ForeCastResult>(appExecutors) {
+    fun loadForeCastWeather( cityId : Int) : Flowable<Resource<ForeCastResult>> {
+        return object : RxNetworkBoundResource<ForeCastResult,ForeCastResult>() {
             override fun saveCallResult(item: ForeCastResult) {
                 item.createAt = Date().time
                 weatherDao.insert(item)
             }
 
-            override fun shouldFetch(data: ForeCastResult?): Boolean {
-                return false //data == null || isNeedRefresh(data.createAt) // 데이터가 없다면 서버로부터 요청
+            override fun shouldFetch(item: Single<ForeCastResult>): Single<Boolean> {
+                return Single.just(true)
             }
 
-            override fun loadFromDb(): LiveData<ForeCastResult>
+            override fun loadFromDb(): Maybe<ForeCastResult>
                 = weatherDao.getForecastByCityId(cityId)
 
-            override fun createCall(): LiveData<ApiResponse<ForeCastResult>>
+            override fun createCall(): Flowable<ForeCastResult>
                 = weatherService.getForecastByCityId(cityId)
-        }.asLiveData()
+        }.asFlowable()
     }
 
     // demo test
