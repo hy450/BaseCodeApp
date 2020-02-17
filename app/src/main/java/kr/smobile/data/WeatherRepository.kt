@@ -3,6 +3,7 @@ package kr.smobile.data
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import kr.smobile.AppExecutors
 import kr.smobile.core.api.WeatherService
 import kr.smobile.core.db.WeatherDao
@@ -55,7 +56,7 @@ class WeatherRepository @Inject constructor(
 
             override fun createCall(): Flowable<OpenWeatherResult>
                     = weatherService.getWeatherByCityName(cityName)
-        }.asFlowable()
+        }.asFlowable().subscribeOn(Schedulers.io())
     }
 
     fun loadLatesWeatherByCityId( cityId: Int) : Flowable<Resource<OpenWeatherResult>> {
@@ -74,7 +75,7 @@ class WeatherRepository @Inject constructor(
             override fun createCall(): Flowable<OpenWeatherResult>
                     = weatherService.getWeatherByCityId(cityId)
 
-        }.asFlowable()
+        }.asFlowable().subscribeOn(Schedulers.io())
     }
 
     fun loadForeCastWeather( cityId : Int) : Flowable<Resource<ForeCastResult>> {
@@ -93,7 +94,7 @@ class WeatherRepository @Inject constructor(
 
             override fun createCall(): Flowable<ForeCastResult>
                 = weatherService.getForecastByCityId(cityId)
-        }.asFlowable()
+        }.asFlowable().subscribeOn(Schedulers.io())
     }
 
     // demo test

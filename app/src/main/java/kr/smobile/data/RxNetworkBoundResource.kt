@@ -15,7 +15,7 @@ abstract class RxNetworkBoundResource<ResultType, RequestType> {
 
 
     init {
-        debug("RxNetworkBoundResource")
+        println("RxNetworkBoundResource")
         val source: Flowable<Resource<ResultType>>
 
         val loadFromDbSingle = Single.create<ResultType> { emitter ->
@@ -43,7 +43,7 @@ abstract class RxNetworkBoundResource<ResultType, RequestType> {
                 }
                 else {
                     loadFromDb()
-                        .map { Resource.Loading(it) as Resource<ResultType> }
+                        .map { Resource.Success(it) as Resource<ResultType> }
                         .toFlowable()
                 }
             }

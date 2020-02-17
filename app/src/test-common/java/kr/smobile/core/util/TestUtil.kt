@@ -17,6 +17,16 @@ object TestUtil {
 
     }
 
+    fun createWeather1() : OpenWeatherResult {
+        val inputStream = javaClass.classLoader
+            .getResourceAsStream("weatherresponse1.json")
+
+        val gson = Gson()
+        val openWeatherResult = gson.fromJson(InputStreamReader(inputStream,"UTF-8"), OpenWeatherResult::class.java)
+        return openWeatherResult
+
+    }
+
     fun createForecastWeather() : ForeCastResult {
         val inputstream = javaClass.classLoader.getResourceAsStream("forecastresponse.json")
 
