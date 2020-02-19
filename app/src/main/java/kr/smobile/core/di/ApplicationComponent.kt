@@ -1,24 +1,24 @@
 package kr.smobile.core.di
 
-import android.app.Application
-import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import kr.smobile.BaseApplication
+import kr.smobile.feature.MainViewModel
+import kr.smobile.feature.addCity.AddCityViewModel
+import kr.smobile.feature.home.HomeViewModel
 import javax.inject.Singleton
 
 @Singleton
-@Component( modules = [ApplicationModule::class, AndroidInjectionModule::class, ActivityBuilderModule::class, AndroidSupportInjectionModule::class])
-interface ApplicationComponent {
+@Component( modules = [ApplicationModule::class,
+    AndroidInjectionModule::class,
+    ActivityBuilderModule::class,
+    AndroidSupportInjectionModule::class,
+    ViewModelAssistedFactoriesModule::class])
+interface ApplicationComponent : AndroidInjector<BaseApplication>  {
 
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun application(application: Application) : Builder
-        fun build() : ApplicationComponent
-    }
-
-    fun inject(application: BaseApplication)
+    @Component.Factory
+    interface Factory: AndroidInjector.Factory<BaseApplication>
 
 }

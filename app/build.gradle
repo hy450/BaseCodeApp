@@ -90,6 +90,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:0.5.2"
+    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:0.5.2"
 
 
     //for RX

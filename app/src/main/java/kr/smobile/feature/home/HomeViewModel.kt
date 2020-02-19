@@ -1,9 +1,8 @@
 package kr.smobile.feature.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kr.smobile.core.platform.BaseViewModel
 import kr.smobile.core.testing.OpenForTesting
 import kr.smobile.core.util.AbsentLiveData
@@ -18,11 +17,17 @@ import javax.inject.Inject
  * 자기가 즐겨찾기한 현재의 날씨 정보를 보여준다.
  */
 @OpenForTesting
-class HomeViewModel @Inject constructor(
-    private val weatherRepository: WeatherRepository
+class HomeViewModel @AssistedInject constructor(
+    private val weatherRepository: WeatherRepository,
+    @Assisted private val handle: SavedStateHandle
 ) : BaseViewModel() {
 
     //var loadingLiveData = MediatorLiveData<Boolean>()
+
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(savedStateHandle: SavedStateHandle) : HomeViewModel
+    }
 
     private val _currFavorCityId = MutableLiveData<Int>()
     val currFavorCityId: LiveData<Int>

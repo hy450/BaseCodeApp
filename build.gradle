@@ -35,7 +35,7 @@ ext {
     lifecycleVersion = "2.2.0"
     retrofitVersion = "2.6.0"
     okhttpVersion = "3.6.0"
-    daggerVersion = "2.22.1"
+    daggerVersion = "2.26"
     mockitoVersion = "2.25.0"
     glide_version = '4.9.0'
     room_version = '2.2.2'
