@@ -1,19 +1,20 @@
 package kr.smobile
 
-import android.app.Activity
-import android.app.Application
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import kr.smobile.core.di.AppInjector
+import dagger.android.DaggerApplication
+import kr.smobile.core.di.DaggerApplicationComponent
 import kr.smobile.core.logging.FileLoggingTree
 import timber.log.Timber
-import javax.inject.Inject
 
-class BaseApplication : Application() , HasActivityInjector {
+class BaseApplication : DaggerApplication() {
 
-    @Inject
-    lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    private val component: AndroidInjector<BaseApplication> by lazy {
+        DaggerApplicationComponent.factory().create(this)
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return component
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -23,11 +24,6 @@ class BaseApplication : Application() , HasActivityInjector {
         } else {
             Timber.plant(FileLoggingTree())
         }
-
-        AppInjector.init(this)
     }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityDispatchingAndroidInjector
-
 
 }

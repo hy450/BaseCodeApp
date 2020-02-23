@@ -15,26 +15,26 @@ import kr.smobile.feature.home.HomeViewModel
 @Module
 abstract class ViewModelModule {
 
-    @Binds
-    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel) : ViewModelAssistedFactory<out ViewModel>
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    abstract fun bindHomeViewModel(viewModel: HomeViewModel) : ViewModelAssistedFactory<out ViewModel>
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(AddCityViewModel::class)
-    abstract fun bindAddCityViewModel(viewModel: AddCityViewModel) : ViewModelAssistedFactory<out ViewModel>
-
-    @Binds
-    abstract fun bindSavedStateRegistryOwner(mainActivity: MainActivity): SavedStateRegistryOwner?
+//    @Binds
+//    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(MainViewModel::class)
+//    abstract fun bindMainViewModel(viewModel: MainViewModel) : ViewModelAssistedFactory<out ViewModel>
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(HomeViewModel::class)
+//    abstract fun bindHomeViewModel(viewModel: HomeViewModel) : ViewModelAssistedFactory<out ViewModel>
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(AddCityViewModel::class)
+//    abstract fun bindAddCityViewModel(viewModel: AddCityViewModel) : ViewModelAssistedFactory<out ViewModel>
+//
+//    @Binds
+//    abstract fun bindSavedStateRegistryOwner(mainActivity: MainActivity): SavedStateRegistryOwner?
 
 
 }

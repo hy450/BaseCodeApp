@@ -7,10 +7,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import kr.smobile.R
+import kr.smobile.core.di.DaggerFragmentFactory
+import javax.inject.Inject
 
-abstract class BaseActivity : AppCompatActivity(){
+abstract class BaseActivity : DaggerAppCompatActivity(){
+
+    @Inject
+    internal lateinit var fragmentFactory: DaggerFragmentFactory
+
 
     protected val compositeDisposables = CompositeDisposable()
 
@@ -21,6 +28,7 @@ abstract class BaseActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportFragmentManager.fragmentFactory = fragmentFactory
 
     }
 

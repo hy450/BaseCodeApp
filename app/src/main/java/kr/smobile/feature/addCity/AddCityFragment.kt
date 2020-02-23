@@ -9,7 +9,10 @@ import kr.smobile.core.di.Injectable
 import kr.smobile.core.extension.viewModel
 import kr.smobile.core.platform.BaseFragment
 
-class AddCityFragment : BaseFragment<AddCityViewModel>(), Injectable {
+class AddCityFragment : BaseFragment<AddCityViewModel>() {
+
+    override val viewModel: AddCityViewModel
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -18,11 +21,7 @@ class AddCityFragment : BaseFragment<AddCityViewModel>(), Injectable {
         return inflater.inflate(R.layout.fragment_add_city, container, false)
     }
 
-    override fun createViewModel(): AddCityViewModel {
-        return viewModel(viewModelFactory) {
 
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

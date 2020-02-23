@@ -11,15 +11,11 @@ import kr.smobile.feature.MainViewModel
 import javax.inject.Inject
 
 @OpenForTesting
-class AddCityViewModel @AssistedInject constructor(
-    @Assisted private val handle: SavedStateHandle
+class AddCityViewModel @Inject constructor(
+
 )
     : BaseViewModel() {
 
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(savedStateHandle: SavedStateHandle) : MainViewModel
-    }
 
     override val loadingEvent: LiveData<Boolean> by lazy {
         MediatorLiveData<Boolean>()

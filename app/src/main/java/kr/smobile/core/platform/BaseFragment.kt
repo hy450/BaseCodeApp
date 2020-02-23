@@ -15,14 +15,9 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class BaseFragment<T: BaseViewModel> : Fragment() , CoroutineScope {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var viewModel: T
+    protected abstract val viewModel: T
 
     protected val compositeDisposables = CompositeDisposable()
-
-    abstract fun createViewModel(): T
 
     private val showAlertEventObserver = Observer<VmEvent<AlertEvent>> { showAlertPopup(it) }
     protected val showLoadingObserver = Observer<Boolean> { updateLoadingIndicator(it) }
@@ -32,7 +27,7 @@ abstract class BaseFragment<T: BaseViewModel> : Fragment() , CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
         // onCreate 에서 생성하지 않고 onViewCreated 에서 생성해야함.
         // 왜냐하면 android injection lifecycle listener 로 수행하고 있기 때문.
-        viewModel = createViewModel()
+        //viewModel = createViewModel()
 
         //show alert popup observer
         viewModel.showAlertEvent.observe(viewLifecycleOwner,showAlertEventObserver)

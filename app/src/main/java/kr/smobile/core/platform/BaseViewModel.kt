@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
+import kr.smobile.core.di.ViewModelFactory
 import kr.smobile.core.util.ActivityIndicator
 import kr.smobile.core.util.SingleLiveEvent
 
@@ -24,5 +25,7 @@ abstract class BaseViewModel: ViewModel() {
         compositeDisposables.clear()
 
     }
+
+    abstract class Factory<V : BaseViewModel>() : ViewModelFactory<V>
 
 }

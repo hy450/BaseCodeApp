@@ -7,6 +7,9 @@ import kr.smobile.feature.MainActivity
 @Module
 abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    @ContributesAndroidInjector(modules = [MainModule::class])
     abstract fun bindMainActivity() : MainActivity
+
+    @Module(includes = [FragmentBuildersModule::class])
+    internal abstract class MainModule
 }

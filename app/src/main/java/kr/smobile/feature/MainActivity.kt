@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import kr.smobile.R
 import kr.smobile.core.di.ViewModelFactory
 import kr.smobile.core.platform.BaseActivity
@@ -15,15 +14,12 @@ import kr.smobile.core.platform.BaseActivity
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity() , HasSupportFragmentInjector {
+class MainActivity : BaseActivity() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by viewModels { viewModelFactory }
+
+    //private val viewModel by viewModels { viewModelFactory }
     //val viewmodel by viewModels<MainViewModel> { SavedStateViewModelFactory(this) }
 
 
@@ -33,5 +29,4 @@ class MainActivity : BaseActivity() , HasSupportFragmentInjector {
         setContentView(R.layout.activity_main)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 }
