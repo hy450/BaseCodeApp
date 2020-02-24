@@ -45,7 +45,7 @@ class HomeFragment @Inject constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        debug("HomeFragment onCreate")
+        debug("onCreate")
         setHasOptionsMenu(true)
 
     }

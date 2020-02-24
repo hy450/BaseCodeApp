@@ -1,5 +1,6 @@
 package kr.smobile.core.logging
 
+import android.content.Context
 import android.os.Environment
 import android.util.Log
 import kr.smobile.core.extension.beforeDay
@@ -14,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FileLoggingTree : Timber.DebugTree() {
+class FileLoggingTree(private val context: Context) : Timber.DebugTree() {
 
     private val LOG_TAG = FileLoggingTree::class.java.simpleName
     private val FILE_MAINTAIN_DAYS = 5
@@ -26,7 +27,7 @@ class FileLoggingTree : Timber.DebugTree() {
         if (priority <= Log.DEBUG) return
 
         try {
-            val path = "Log"
+            val path = "logger"
             val fileNameTimeStamp = SimpleDateFormat(
                 log_file_foramt_pattern,
                 Locale.getDefault()
@@ -43,20 +44,14 @@ class FileLoggingTree : Timber.DebugTree() {
 
             // If file created or exists save logs
             if (file != null) {
+                Log.e(LOG_TAG,"file logging path:${file.absolutePath}")
                 val writer = FileWriter(file, true)
-                /*
-                writer.append("<p style=\"background:lightgray;\"><strong " + "style=\"background:lightblue;\">&nbsp&nbsp")
-                    .append(logTimeStamp)
-                    .append(" :&nbsp&nbsp</strong><strong>&nbsp&nbsp")
-                    .append(tag ?: LOG_TAG)
-                    .append("</strong> - ")
-                    .append(message)
-                    .append("</p>")
-                */
+
                 writer.append("[${logTimeStamp}] : ")
                     .append(tag ?: LOG_TAG)
                     .append(" - ")
                     .append(message)
+                    .append("\n")
                 writer.flush()
                 writer.close()
             }
@@ -75,9 +70,9 @@ class FileLoggingTree : Timber.DebugTree() {
     private fun generateFile(path: String, fileName: String): File? {
         var file: File? = null
         if ( isExternalStorageAvailable() ) {
+            val diskPath = context.getExternalFilesDir(null)!!.absolutePath
             val root = File(
-                Environment.getExternalStorageDirectory().absolutePath,
-                BuildConfig.APPLICATION_ID + separator + path
+                diskPath,separator + path
             )
 
             var dirExists = true

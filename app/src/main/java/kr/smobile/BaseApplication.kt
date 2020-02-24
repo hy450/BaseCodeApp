@@ -20,9 +20,9 @@ class BaseApplication : DaggerApplication() {
         super.onCreate()
 
         if(BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree(), FileLoggingTree())
+            Timber.plant(Timber.DebugTree(), FileLoggingTree(applicationContext))
         } else {
-            Timber.plant(FileLoggingTree())
+            Timber.plant(FileLoggingTree(applicationContext))
         }
     }
 
