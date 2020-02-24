@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
-import kr.smobile.R
+import kr.smobile.sample.R
 import kr.smobile.core.di.DaggerFragmentFactory
 import javax.inject.Inject
 

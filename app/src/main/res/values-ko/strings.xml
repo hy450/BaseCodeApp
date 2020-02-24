@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BaseCodeApp</string>
+
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_name">공지사항 알림</string>
+
     <string name="home_celius_temperature">%1$s°</string>
     <string name="home_minmax_temperature">최저 %1$d°/최고 %2$d°</string>
 

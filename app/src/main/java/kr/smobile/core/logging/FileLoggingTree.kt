@@ -6,7 +6,6 @@ import android.util.Log
 import kr.smobile.core.extension.beforeDay
 import kr.smobile.core.extension.getCalendar
 import kr.smobile.core.extension.timeClear
-import kr.smobile.BuildConfig
 import timber.log.Timber
 import java.io.File
 import java.io.File.separator

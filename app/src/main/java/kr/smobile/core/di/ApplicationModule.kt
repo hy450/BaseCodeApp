@@ -5,10 +5,10 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import kr.smobile.BaseApplication
-import kr.smobile.BuildConfig
 import kr.smobile.core.api.WeatherRestApiService
 import kr.smobile.core.db.BaseCodeDb
 import kr.smobile.core.db.WeatherDao
+import kr.smobile.sample.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

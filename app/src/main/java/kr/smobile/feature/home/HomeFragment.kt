@@ -2,29 +2,20 @@ package kr.smobile.feature.home
 
 
 import android.os.Bundle
-import android.view.*
-import android.widget.TextView
-import androidx.core.view.isVisible
-import androidx.databinding.BindingAdapter
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateViewModelFactory
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
-import kr.smobile.R
 import kr.smobile.core.di.withFactory
 import kr.smobile.core.extension.debug
-import kr.smobile.core.extension.observe
-import kr.smobile.core.extension.viewModel
 import kr.smobile.core.platform.BaseFragment
-import kr.smobile.databinding.FragmentHomeBinding
-import kr.smobile.vo.ForeCastResult
-import kr.smobile.vo.MainInfo
-import kr.smobile.vo.OpenWeatherResult
-import kr.smobile.vo.Resource
+import kr.smobile.sample.databinding.FragmentHomeBinding
+import kr.smobile.sample.R
 import javax.inject.Inject
 
 

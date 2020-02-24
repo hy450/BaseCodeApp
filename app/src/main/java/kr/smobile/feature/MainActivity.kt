@@ -5,9 +5,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import kr.smobile.R
+import kr.smobile.sample.R
 import kr.smobile.core.di.ViewModelFactory
 import kr.smobile.core.platform.BaseActivity
 
@@ -27,6 +28,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        FirebaseCrashlytics.getInstance().setUserId("12345")
     }
 
 }

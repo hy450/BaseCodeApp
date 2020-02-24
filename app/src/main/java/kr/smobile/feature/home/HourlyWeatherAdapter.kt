@@ -1,20 +1,12 @@
 package kr.smobile.feature.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_home.*
-import kr.smobile.BR
-import kr.smobile.R
-import kr.smobile.core.extension.debug
 import kr.smobile.core.extension.getTimeStr
-import kr.smobile.databinding.HomeHourlyWeatherItemBinding
+import kr.smobile.sample.BR
+import kr.smobile.sample.databinding.HomeHourlyWeatherItemBinding
 import kr.smobile.vo.OpenForeCastWeather
 import java.util.*
 

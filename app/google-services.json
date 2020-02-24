@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "149432768368",
+    "firebase_url": "https://smobilesample.firebaseio.com",
+    "project_id": "smobilesample",
+    "storage_bucket": "smobilesample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149432768368:android:b6b47f310ae93a8ca0e1b5",
+        "android_client_info": {
+          "package_name": "kr.smobile.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149432768368-0h21lgtb9e6ffk4i3piptus6j3d8r1oq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7KOFnlMVerrnpV5J6gC4XmVP3jWUFfxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149432768368-0h21lgtb9e6ffk4i3piptus6j3d8r1oq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
