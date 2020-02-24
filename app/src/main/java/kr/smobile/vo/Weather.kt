@@ -39,9 +39,16 @@ data class MainInfo(
     val temp_max: Double,
     @field:SerializedName("humidity") // 습도 unit %
     val humidity: Int
-
-
-)
+) {
+    val dispTemperatureStr : String
+        get() {
+            return temperature.toInt().toString()
+        }
+    val temp_min_toInt: Int
+        get() = temp_min.toInt()
+    val temp_max_toInt: Int
+        get() = temp_max.toInt()
+}
 
 @Entity(primaryKeys = ["coord_latitude","coord_longitude", "datetime"])
 @TypeConverters(OpenWeatherTypeConverter::class)

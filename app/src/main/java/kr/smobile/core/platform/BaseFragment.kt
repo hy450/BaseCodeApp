@@ -1,20 +1,27 @@
 package kr.smobile.core.platform
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseFragment<T: BaseViewModel> : Fragment() , CoroutineScope {
+abstract class BaseFragment<T: BaseViewModel, U: ViewDataBinding>(
+    @LayoutRes private val layoutId: Int
+) : Fragment() , CoroutineScope {
 
+    protected lateinit var binding: U
     protected abstract val viewModel: T
 
     protected val compositeDisposables = CompositeDisposable()
@@ -22,6 +29,16 @@ abstract class BaseFragment<T: BaseViewModel> : Fragment() , CoroutineScope {
     private val showAlertEventObserver = Observer<VmEvent<AlertEvent>> { showAlertPopup(it) }
     protected val showLoadingObserver = Observer<Boolean> { updateLoadingIndicator(it) }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,layoutId,container,false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(BR.viewModel,viewModel)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

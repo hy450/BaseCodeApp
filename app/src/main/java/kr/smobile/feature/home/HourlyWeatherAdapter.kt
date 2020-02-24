@@ -5,26 +5,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
+import kr.smobile.BR
 import kr.smobile.R
 import kr.smobile.core.extension.debug
 import kr.smobile.core.extension.getTimeStr
+import kr.smobile.databinding.HomeHourlyWeatherItemBinding
 import kr.smobile.vo.OpenForeCastWeather
 import java.util.*
 
+data class HourlyWeatherUiModel(
+    val dateStr: String,
+    val currDegree: String,
+    val iconUrl: String? = null
+) {
+    companion object {
+        fun convert(item: OpenForeCastWeather): HourlyWeatherUiModel {
+            val dateStr = Date(item.datetime*1000).getTimeStr("a h:mm")
+            val iconUrl: String? = item.weatherItems.firstOrNull()?.icon
+            return HourlyWeatherUiModel(
+                dateStr,
+                item.mainWeatherInfo.dispTemperatureStr,
+                iconUrl
+            )
+        }
+    }
+}
+
 class HourlyWeatherAdapter : RecyclerView.Adapter<HourlyWeatherAdapter.ViewHolder>() {
 
-    var hourlyWeatherInfos = listOf<OpenForeCastWeather>()
+    var hourlyWeatherInfos = listOf<HourlyWeatherUiModel>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.home_hourly_weather_item,parent,false)
-        return ViewHolder(view)
+        return ViewHolder(HomeHourlyWeatherItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun getItemCount(): Int = hourlyWeatherInfos.size
@@ -33,24 +54,11 @@ class HourlyWeatherAdapter : RecyclerView.Adapter<HourlyWeatherAdapter.ViewHolde
         holder.bind(hourlyWeatherInfos[position])
     }
 
-    inner class ViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
+    inner class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: OpenForeCastWeather) {
-
-            val imgView = itemView.findViewById<ImageView>(R.id.imageView)
-            val hourTxt = itemView.findViewById<TextView>(R.id.hourTxt)
-            val temperature = itemView.findViewById<TextView>(R.id.temperature)
-
-            item.weatherItems.firstOrNull()?.let {
-                Glide.with(itemView.context)
-                    .load("http://openweathermap.org/img/wn/${it.icon}@2x.png")
-                    .into(imgView)
-            }
-
-            val date = Date(item.datetime*1000)
-            hourTxt.text = date.getTimeStr("a h:mm")
-            temperature.text = itemView.resources.getString(R.string.home_celius_temperature,item.mainWeatherInfo.temperature.toInt().toString())
-
+        fun bind(item: HourlyWeatherUiModel) {
+            binding.setVariable(BR.weather,item)
+            binding.executePendingBindings()
         }
 
     }

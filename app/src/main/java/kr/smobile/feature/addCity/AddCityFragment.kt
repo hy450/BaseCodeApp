@@ -10,21 +10,14 @@ import kr.smobile.core.di.Injectable
 import kr.smobile.core.di.withFactory
 import kr.smobile.core.extension.viewModel
 import kr.smobile.core.platform.BaseFragment
+import kr.smobile.databinding.FragmentAddCityBinding
 import javax.inject.Inject
 
 class AddCityFragment @Inject constructor(
     addCityViewModelFactory: AddCityViewModel.Factory
-): BaseFragment<AddCityViewModel>() {
+): BaseFragment<AddCityViewModel,FragmentAddCityBinding>(R.layout.fragment_add_city) {
 
     override val viewModel: AddCityViewModel by viewModels { withFactory(addCityViewModelFactory) }
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_city, container, false)
-    }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

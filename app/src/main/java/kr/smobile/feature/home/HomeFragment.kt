@@ -3,7 +3,9 @@ package kr.smobile.feature.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
@@ -18,7 +20,9 @@ import kr.smobile.core.extension.debug
 import kr.smobile.core.extension.observe
 import kr.smobile.core.extension.viewModel
 import kr.smobile.core.platform.BaseFragment
+import kr.smobile.databinding.FragmentHomeBinding
 import kr.smobile.vo.ForeCastResult
+import kr.smobile.vo.MainInfo
 import kr.smobile.vo.OpenWeatherResult
 import kr.smobile.vo.Resource
 import javax.inject.Inject
@@ -30,7 +34,7 @@ import javax.inject.Inject
  */
 class HomeFragment @Inject constructor(
     homeViewModelFactory: HomeViewModel.Factory
-): BaseFragment<HomeViewModel>() {
+): BaseFragment<HomeViewModel,FragmentHomeBinding>(R.layout.fragment_home) {
 
     override val viewModel: HomeViewModel by viewModels { withFactory(homeViewModelFactory) }
 
@@ -46,27 +50,12 @@ class HomeFragment @Inject constructor(
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        debug("HomeFragment onCreateView")
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
-
-//    override fun createViewModel(): HomeViewModel {
-//        return viewModel(viewModelFactory) {
-//            viewLifecycleOwner.observe(favorCityWeatherRepo, ::updateCurrWeatherInfo)
-//              viewLifecycleOwner.observe(favorHourlyWeatherRepo, ::updateForeCastWeather)
-//      }
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.favorCityWeatherRepo.observe(viewLifecycleOwner,::updateCurrWeatherInfo)
-        viewModel.favorHourlyWeatherRepo.observe(viewLifecycleOwner,::updateForeCastWeather)
+        viewModel.forecastWeather.observe(viewLifecycleOwner) {
+            hourlyListViewAdapter.hourlyWeatherInfos = it
+        }
 
         viewModel.loadingEvent.observe(viewLifecycleOwner,showLoadingObserver)
 
@@ -104,59 +93,4 @@ class HomeFragment @Inject constructor(
         viewModel.setCurrFavoriteCity(cityId)
     }
 
-    private fun updateCurrWeatherInfo(weatherInfo : Resource<OpenWeatherResult>?) {
-        debug("updateCurrWeatherInfo")
-
-        when(weatherInfo) {
-            is Resource.Success -> {
-                debug("updateCurrWeatherInfo success")
-                displayCurrWeather(weatherInfo.data)
-            }
-            is Resource.Loading -> {
-                // weatherInfo.data 가 null 이면 loading 아이콘???
-                weatherInfo.data?.let {
-                    debug("updateCurrWeatherInfo Loading")
-                    displayCurrWeather(it)
-                }
-            }
-            is Resource.Error -> {
-                debug("updateCurrWeatherInfo error")
-                homeTempTxt.text = "error"
-                minMaxTempTxt.isVisible = false
-            }
-        }
-    }
-
-    private fun displayCurrWeather(result: OpenWeatherResult?) {
-        val weatherMain = result?.mainWeatherInfo
-        homeTempTxt.text = getString(R.string.home_celius_temperature,weatherMain?.temperature?.toInt()?.toString() ?: "-")
-        minMaxTempTxt.text = getString(R.string.home_minmax_temperature,weatherMain?.temp_min?.toInt() ?: 0, weatherMain?.temp_max?.toInt() ?: 0)
-
-        result?.weatherItems?.firstOrNull()?.let {
-            Glide.with(this)
-                .load("http://openweathermap.org/img/wn/${it.icon}@2x.png")
-                .into(weatherImg)
-        }
-
-    }
-
-    private fun updateForeCastWeather( foreCastWeather: Resource<ForeCastResult>? ) {
-        debug("updateForeCastWeather")
-
-        when(foreCastWeather) {
-            is Resource.Success ->
-                hourlyListViewAdapter.hourlyWeatherInfos = foreCastWeather.data?.list ?: emptyList()
-
-            is Resource.Loading -> {
-                hourlyListViewAdapter.hourlyWeatherInfos = foreCastWeather.data?.list ?: emptyList()
-            }
-
-            is Resource.Error -> {
-
-            }
-
-        }
-
-
-    }
 }

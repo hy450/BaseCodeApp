@@ -26,6 +26,6 @@ abstract class BaseViewModel: ViewModel() {
 
     }
 
-    abstract class Factory<V : BaseViewModel>() : ViewModelFactory<V>
+    abstract class Factory<V : BaseViewModel> : ViewModelFactory<V>
 
 }

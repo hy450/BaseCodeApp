@@ -40,7 +40,9 @@ android {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
     }
-
+    dataBinding {
+        enabled = true
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -68,7 +70,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
 
-    implementation "androidx.fragment:fragment-ktx:1.2.1"
+    implementation "androidx.fragment:fragment-ktx:1.2.2"
     implementation "com.google.android.material:material:1.1.0"
 
     //room db --[[
