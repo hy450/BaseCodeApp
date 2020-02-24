@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import kr.smobile.R
 import kr.smobile.core.di.Injectable
+import kr.smobile.core.di.withFactory
 import kr.smobile.core.extension.viewModel
 import kr.smobile.core.platform.BaseFragment
+import javax.inject.Inject
 
-class AddCityFragment : BaseFragment<AddCityViewModel>() {
+class AddCityFragment @Inject constructor(
+    addCityViewModelFactory: AddCityViewModel.Factory
+): BaseFragment<AddCityViewModel>() {
 
-    override val viewModel: AddCityViewModel
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val viewModel: AddCityViewModel by viewModels { withFactory(addCityViewModelFactory) }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

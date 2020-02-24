@@ -1,6 +1,5 @@
 package kr.smobile.core.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
@@ -17,8 +16,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
-import javax.net.ssl.*
-import javax.security.cert.CertificateException
 
 @Module
 class ApplicationModule {
@@ -28,9 +25,9 @@ class ApplicationModule {
         return application.applicationContext
     }
 
-    @Singleton
-    @Provides
-    fun provideApplicationContext(application: Application): Context = application
+//    @Singleton
+//    @Provides
+//    fun provideApplicationContext(application: BaseApplication): Context = application
 
     @Named("openweather")
     @Singleton
@@ -46,7 +43,7 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideDb(app: Application) : BaseCodeDb {
+    fun provideDb(app: BaseApplication) : BaseCodeDb {
         return Room.databaseBuilder(app, BaseCodeDb::class.java, "BaseCode.db")
             //.addCallback(DBConfigure.rdc)
             //.addMigrations(DBConfigure.MIGRATION_1_2)
