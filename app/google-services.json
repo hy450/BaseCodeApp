@@ -15,8 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "149432768368-0h21lgtb9e6ffk4i3piptus6j3d8r1oq.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "149432768368-erudl961vskq4ua2prjun5lhsoteflu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.smobile.sample",
+            "certificate_hash": "45f808d08ee80135171f8b2ad806f7441e198629"
+          }
         }
       ],
       "api_key": [
@@ -28,7 +32,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "149432768368-0h21lgtb9e6ffk4i3piptus6j3d8r1oq.apps.googleusercontent.com",
+              "client_id": "149432768368-k3jtrk6i1g9pla07tppj329hlf4gbl5g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

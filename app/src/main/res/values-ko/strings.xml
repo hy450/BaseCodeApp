@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">BaseCodeApp</string>
 
+    <string name="google_default_web_client_id">149432768368-k3jtrk6i1g9pla07tppj329hlf4gbl5g.apps.googleusercontent.com</string>
+
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="default_notification_channel_name">공지사항 알림</string>
 
