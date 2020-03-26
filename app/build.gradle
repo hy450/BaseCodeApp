@@ -37,9 +37,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            signingConfig signingConfigs.releaseWithSignedKey
-        }
+            debug {
+                signingConfig signingConfigs.releaseWithSignedKey
+            }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -143,11 +143,11 @@ dependencies {
     //===== 여기 까지 ===============================//
     //for test
     testImplementation 'junit:junit:4.12'
-    testImplementation "androidx.arch.core:core-testing:2.0.1"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
-    androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'
